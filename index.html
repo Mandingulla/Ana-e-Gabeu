@@ -12,12 +12,8 @@
       padding: 0;
     }
     body {
-      /* O fundo agora recebe a imagem de Van Gogh */
-      background-image: linear-gradient(rgba(18, 19, 28, 0.60), rgba(26, 28, 46, 0.60)), url('138a767c-d665-497a-9b0c-34c635216ee9.jpeg');
-      background-repeat: no-repeat;
-      background-position: center center;
+      background: linear-gradient(rgba(18, 19, 28, 0.60), rgba(26, 28, 46, 0.60)), url('fundo.jpeg') no-repeat center center fixed;
       background-size: cover;
-      background-attachment: fixed;
       color: #FFFFFF;
       font-family: 'Georgia', serif;
       min-height: 100vh;
@@ -242,7 +238,7 @@
 
     <!-- Foto do Casal -->
     <div class="photo-frame">
-      <img src="IMG_5175.jpeg" alt="Ana e Gabeu">
+      <img src="Ana e Gabeu.jpeg" alt="Ana e Gabeu">
     </div>
 
     <!-- Contador de Tempo -->
@@ -318,8 +314,8 @@
     }
     setInterval(createHeart, 300);
 
-    // 2. Contador de Tempo - Data de início: 06/08/2026 às 21:25
-    const startDate = new Date(2026, 7, 6, 21, 25, 0);
+    // 2. Contador de Tempo - Data de início: 06/07/2026 às 21:25
+    const startDate = new Date(2026, 6, 6, 21, 25, 0);
 
     function updateCounter() {
       const now = new Date();
