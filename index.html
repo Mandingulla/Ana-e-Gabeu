@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ana e Gabeu</title>
+  <style>
+    /* Estilos Gerais */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(rgba(18, 19, 28, 0.60), rgba(26, 28, 46, 0.60)), url('fundo.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #FFFFFF;
+      font-family: 'Georgia', serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 15px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animação dos Corações Caindo */
+    .heart-fall {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1000;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(105vh) rotate(360deg);
+      }
+    }
+
+    /* Container Principal */
+    .container {
+      max-width: 500px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      z-index: 1;
+    }
+
+    /* Título */
+    h1 {
+      font-size: 2.2rem;
+      color: #F3E5AB;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: normal;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    .subtitle {
+      font-style: italic;
+      color: #E0E0E0;
+      text-align: center;
+      font-size: 1rem;
+      margin-top: -15px;
+      text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+    }
+
+    /* Foto do Casal */
+    .photo-frame {
+      width: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 2px solid #D4AF37;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+      background-color: #000;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Contador de Tempo */
+    .counter-box {
+      width: 100%;
+      background: rgba(18, 19, 28, 0.65);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 15px;
+      padding: 20px 10px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    .counter-title {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: #D4AF37;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+    .timer {
+      display: flex;
+      justify-content: space-around;
+    }
+    .time-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .time-num {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+    .time-label {
+      font-size: 0.75rem;
+      color: #DDDDDD;
+      margin-top: 2px;
+    }
+
+    /* Mensagem */
+    .card {
+      width: 100%;
+      background: rgba(18, 19, 28, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 20px;
+      line-height: 1.6;
+      color: #FFFFFF;
+      text-align: center;
+      font-size: 1.05rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    /* Área do Spotify */
+    .spotify-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .spotify-player {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+    .spotify-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: #1DB954;
+      color: #000000;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-family: sans-serif;
+      font-size: 0.95rem;
+      transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .spotify-btn:hover {
+      transform: scale(1.03);
+      background-color: #1ed760;
+    }
+
+    /* Certidão de Namoro */
+    .certidao-card {
+      width: 100%;
+      background-color: rgba(255, 253, 240, 0.92);
+      color: #5A3249;
+      border: 8px solid #FFB6C1;
+      border-radius: 20px;
+      padding: 30px 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .certidao-title {
+      font-size: 1.8rem;
+      color: #B54271;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+    .certidao-text {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      font-style: italic;
+      color: #7A4262;
+      margin-bottom: 25px;
+      padding: 0 10px;
+    }
+
+    /* Botão Esperando Ficar Verde */
+    .green-btn {
+      background: linear-gradient(135deg, #FFB6C1, #E6A8D7);
+      border: 2px solid #B54271;
+      color: #5A3249;
+      padding: 12px 22px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .green-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+    .green-btn.signed {
+      background: #D4EDDA;
+      border-color: #28A745;
+      color: #155724;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Título Principal -->
+    <h1>Ana e Gabeu</h1>
+    <div class="subtitle">Este é o começo da nossa história na internet.</div>
+
+    <!-- Foto do Casal -->
+    <div class="photo-frame">
+      <img src="Ana e Gabeu.jpeg" alt="Ana e Gabeu">
+    </div>
+
+    <!-- Contador de Tempo -->
+    <div class="counter-box">
+      <div class="counter-title">Juntos há exatamente</div>
+      <div class="timer">
+        <div class="time-unit">
+          <span class="time-num" id="days">0</span>
+          <span class="time-label">Dias</span>
+        </div>
+        <div class="time-unit">
+          <span class="time-num" id="hours">0</span>
+          <span class="time-label">Horas</span>
+        </div>
+        <div class="time-unit">
+          <span class="time-num" id="minutes">0</span>
+          <span class="time-label">Min</span>
+        </div>
+        <div class="time-unit">
+          <span class="time-num" id="seconds">0</span>
+          <span class="time-label">Seg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensagem -->
+    <div class="card">
+      Ana, não me lembro de como era minha vida antes de você fazer parte dela. Você é o sol em torno do qual meu planeta orbita; você ilumina qualquer ambiente com sua luz própria. Espero ser capaz de fazer para você o mesmo bem que você faz para mim.
+    </div>
+
+    <!-- Seção de Música do Spotify -->
+    <div class="spotify-section">
+      <!-- Player Embutido da Playlist -->
+      <iframe class="spotify-player" src="https://open.spotify.com/embed/playlist/7CLBLrLanZXlCCxMdwUsMN?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      
+      <!-- Link Direto para a Playlist -->
+      <a href="https://open.spotify.com/playlist/7CLBLrLanZXlCCxMdwUsMN?si=K8N4yT0ETtCQwCoEVGviow" target="_blank" class="spotify-btn">
+        🎵 Abrir playlist no Spotify
+      </a>
+    </div>
+
+    <!-- Certidão de Namoro -->
+    <div class="certidao-card">
+      <div class="certidao-title">CERTIDÃO DE NAMORO</div>
+      <div class="certidao-text">
+        Prometo ser seu parceiro de aventuras, seu aliado nas decisões duvidosas e seu apoio nos dias difíceis. Que nosso namoro seja leve, intenso e cheio de amor em cada passo dessa aventura.
+      </div>
+
+      <div>
+        <button class="green-btn" id="greenBtn" onclick="assinarCertidao()">
+          Esperando ficar verde 💙+💛
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. Chuva de corações rosa e roxo
+    const colors = ['#FF69B4', '#FFB6C1', '#8A2BE2', '#9370DB', '#DA70D6'];
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-fall');
+      heart.innerText = '♥';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.fontSize = Math.random() * 15 + 12 + 'px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+    setInterval(createHeart, 300);
+
+    // 2. Contador de Tempo - Data de início: 06/07/2026 às 21:25
+    const startDate = new Date(2026, 6, 6, 21, 25, 0);
+
+    function updateCounter() {
+      const now = new Date();
+      let diff = now - startDate;
+
+      if (diff < 0) diff = 0;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').innerText = days;
+      document.getElementById('hours').innerText = hours;
+      document.getElementById('minutes').innerText = minutes;
+      document.getElementById('seconds').innerText = seconds;
+    }
+    setInterval(updateCounter, 1000);
+    updateCounter();
+
+    // 3. Clique do Botão (Ficar Verde)
+    function assinarCertidao() {
+      const btn = document.getElementById('greenBtn');
+      btn.innerHTML = 'Ficou verde! 💚';
+      btn.classList.add('signed');
+    }
+  </script>
+</body>
+</html>
